@@ -14,10 +14,16 @@ from sqlmodel import Field, Session, SQLModel, create_engine, select
 from emails import send_confirmation_email
 
 
-# 1. Database: a single file called medge.db
-DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///medge.db")
-engine = create_engine(DATABASE_URL)
-# engine = create_engine("sqlite:///medge.db")
+# 1. Database: Neon (Postgres) when DATABASE_URL is set, otherwise a local file
+database_url = os.getenv("DATABASE_URL", "sqlite:///medge.db").strip().strip("'\"")
+
+# Neon gives "postgresql://..." but we installed psycopg, so tell SQLAlchemy to use it
+for prefix in ("postgresql://", "postgres://"):
+    if database_url.startswith(prefix):
+        database_url = "postgresql+psycopg://" + database_url[len(prefix):]
+
+# pool_pre_ping reconnects if the database connection went to sleep
+engine = create_engine(database_url, pool_pre_ping=True)
 
 
 # 2. The table: one row per person on the waitlist
