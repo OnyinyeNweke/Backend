@@ -15,7 +15,9 @@ from emails import send_confirmation_email
 
 
 # 1. Database: a single file called medge.db
-engine = create_engine("sqlite:///medge.db")
+DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///medge.db")
+engine = create_engine(DATABASE_URL)
+# engine = create_engine("sqlite:///medge.db")
 
 
 # 2. The table: one row per person on the waitlist
