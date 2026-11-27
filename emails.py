@@ -36,7 +36,7 @@ Medge is a product of KytoLabx.
 <p><a href="{escape(confirm_link)}" style="display:inline-block;padding:14px 24px;background:#0f766e;color:#ffffff;border-radius:12px;text-decoration:none">Confirm my email</a></p>
 <p>Want to hear first? <a href="{escape(whatsapp)}">Join our WhatsApp channel</a>.</p>
 <p>If this was not you, ignore this email and nothing will happen.</p>
-<p style="font-size:14px"><a href="{escape(leave_link)}">Leave the waitlist</a><br>Medge is a product of KytoLabx.</p>
+<p style="font-size:14px"><a href="{escape(leave_link)}">Leave the waitlist</a></p>
 </div>"""
 
     # Practice mode: with no email server set up, print the email instead
